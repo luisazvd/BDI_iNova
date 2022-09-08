@@ -6,7 +6,7 @@ USE iNova;
 
 CREATE TABLE Endereco (
 idEndereco INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
-cep INT NOT NULL,
+cep INT,
 logradouro VARCHAR(50) NOT NULL,
 numero INT NOT NULL,
 estado VARCHAR(45) NOT NULL,
@@ -17,8 +17,8 @@ bairro VARCHAR(45) NOT NULL
 CREATE TABLE Pessoa (
 idPessoa INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
 nome VARCHAR(45) NOT NULL,
-telefone INT NOT NULL UNIQUE,
-cpf_pessoa INT NOT NULL UNIQUE,
+telefone INT,
+cpf_pessoa INT NOT NULL,
 Endereco_idEndereco INT NOT NULL,
 CONSTRAINT fk_Pessoa_Endereco1 FOREIGN KEY (Endereco_idEndereco) REFERENCES Endereco (idEndereco)
 );
@@ -141,4 +141,22 @@ Produto_Estoque_idEstoque INT NOT NULL,
 CONSTRAINT fk_Venda_has_Produto_Venda1 FOREIGN KEY (Venda_idVenda) REFERENCES Venda (idVenda),
 CONSTRAINT fk_Venda_has_Produto_Produto1 FOREIGN KEY (Produto_idProduto) REFERENCES Produto (idProduto)
 );
+
+INSERT INTO categoria (nome_categoria, ordenacao, descricao) VALUES ('COMBOS', 1, 'OS MELHORES COMBOS PARA NOITE');
+INSERT INTO categoria (nome_categoria, ordenacao, descricao) VALUES ('BEBIDAS', 2, 'BEBIDAS GELADAS E QUENTES');
+INSERT INTO categoria (nome_categoria, ordenacao, descricao) VALUES ('PORÇÕES', 3, 'ENTRADAS PARA PEDIDOS');
+
+SELECT idCategoria, nome_categoria, descricao FROM categoria;
+
+INSERT INTO endereco (logradouro, numero, estado, cidade, bairro) VALUES ('R. Engenheiro Beltrão', 2323, 'PARANÁ', 'TAMBOARA', 'CENTRO');
+INSERT INTO endereco (logradouro, numero, estado, cidade, bairro) VALUES ('R. Antonio Felipe', 45, 'PARANÁ', 'PARANAVAÍ', 'SÃO JOÃO');
+INSERT INTO endereco (logradouro, numero, estado, cidade, bairro) VALUES ('Av. Heitor Furtado', 3568, 'PARANÁ', 'PARANAVAÍ', 'CANADÁ');
+
+SELECT idEndereco, logradouro, numero, cidade FROM endereco;
+
+INSERT INTO pessoa (nome, cpf_pessoa, Endereco_idEndereco) VALUES ('JOAO', 11112345698, 1);
+INSERT INTO pessoa (nome, cpf_pessoa, Endereco_idEndereco) VALUES ('SAMARA', 12189412345, 3);
+INSERT INTO pessoa (nome, cpf_pessoa, Endereco_idEndereco) VALUES ('ANDERSON', 12154564895, 2);
+
+SELECT idPessoa, nome, Endereco_idEndereco FROM pessoa;
 
